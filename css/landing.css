@@ -4,8 +4,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
+    background: linear-gradient(135deg, #fffbf0 0%, #faf8f3 100%);
+    color: #1a1a1a;
     position: relative;
     overflow: hidden;
 }
@@ -13,10 +13,29 @@
 .hero::before {
     content: '';
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-    animation: rotate 20s linear infinite;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(250, 204, 21, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+    animation: fluidMove 12s ease-in-out infinite;
+}
+
+@keyframes fluidMove {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.95);
+    }
 }
 
 @keyframes rotate {
@@ -38,31 +57,34 @@
 
 .hero h1 {
     font-size: 5rem;
-    font-weight: 800;
+    font-weight: 900;
     margin-bottom: 1rem;
     letter-spacing: -2px;
-    background: linear-gradient(to right, #60a5fa, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #1a1a1a;
+    font-family: 'Poppins', sans-serif;
 }
 
 .hero .subtitle {
     font-size: 1.8rem;
-    opacity: 0.9;
+    color: #4a4a4a;
     font-weight: 300;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Sections */
 /* Sections */
 section {
     padding: var(--spacing-xl) 0;
 }
 
 .about-section {
-    background-color: white;
+    background-color: #ffffff;
+    color: #1a1a1a;
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    /* Centered without container class if strictly wanting narrow */
+    padding: 2rem;
+    border-radius: 12px;
 }
 
 .about-section .container {
@@ -72,22 +94,26 @@ section {
 /* Team Section - Anime Style Alternating Layout */
 .team-section {
     padding: 0;
-    background-color: #f8fafc;
+    background-color: #faf8f3;
 }
 
 .team-member-row {
     display: flex;
     align-items: center;
-    min-height: 80vh;
-    /* Full viewport height feeling */
-    padding: 4rem 0;
+    min-height: 70vh;
+    padding: 6rem 0;
     position: relative;
     overflow: hidden;
+
+    /* Scroll-based animation setup */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .team-member-row:nth-child(even) {
     flex-direction: row-reverse;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .member-image-container {
@@ -106,7 +132,8 @@ section {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.5);
+    /* Darker shadow */
     transition: transform 0.5s ease;
 }
 
@@ -127,21 +154,14 @@ section {
     z-index: 2;
 }
 
-.team-member-row:nth-child(odd) .member-info-container {
-    animation: slideInRight 0.8s ease-out both;
-    /* Trigger via JS intersection observer ideally, but simple animation for now */
-}
 
-.team-member-row:nth-child(even) .member-info-container {
-    animation: slideInLeft 0.8s ease-out both;
-}
 
 .member-name {
     font-size: 4rem;
     font-weight: 900;
     line-height: 1;
     margin-bottom: 0.5rem;
-    color: #1e293b;
+    color: #1a1a1a;
     text-transform: uppercase;
     letter-spacing: -1px;
 }
@@ -156,7 +176,7 @@ section {
 
 .member-bio {
     font-size: 1.2rem;
-    color: #64748b;
+    color: #4a4a4a;
     margin-bottom: 3rem;
     max-width: 500px;
 }

@@ -13,12 +13,14 @@
  */
 const teamMembers = [
     {
-        id: "member-a",
-        name: "Member A",
-        role: "Full Stack Developer",
-        description: "Specializing in React and Node.js with a passion for scalable architecture.",
-        image: "assets/images/member-a.jpg", // Ensure this image exists or change it
-        link: "team/a.html"
+        id: "krishna-surya-chowdary",
+        name: "Pothuri Krishna Surya Chowdary",
+        role: "AI Researcher & Data Science Student",
+        description: "AI-powered coding assistant with multi-LLM reasoning and RAG-based context grounding.",
+        image: "assets/images/krishna.jpg",
+        link: "team/krishna.html",
+        flagshipProject: "AI-Assisted Coding Extension",
+        themeColor: "#3b82f6" // Blue
     },
     {
         id: "member-b",
@@ -26,7 +28,8 @@ const teamMembers = [
         role: "Frontend Developer",
         description: "Creating beautiful, responsive web experiences with modern CSS and animations.",
         image: "assets/images/member-b.jpg",
-        link: "team/b.html"
+        link: "team/b.html",
+        themeColor: "#8b5cf6" // Purple
     },
     {
         id: "member-c",
@@ -34,7 +37,8 @@ const teamMembers = [
         role: "Backend Configurator",
         description: "Focusing on database optimization and API security.",
         image: "assets/images/member-c.jpg",
-        link: "team/c.html"
+        link: "team/c.html",
+        themeColor: "#10b981" // Emerald
     },
     {
         id: "member-d",
@@ -42,7 +46,8 @@ const teamMembers = [
         role: "Backend Configurator",
         description: "Focusing on database optimization and API security.",
         image: "assets/images/member-c.jpg",
-        link: "team/d.html"
+        link: "team/d.html",
+        themeColor: "#f59e0b" // Amber
     }
     // Copy the block above to add a new member
 ];

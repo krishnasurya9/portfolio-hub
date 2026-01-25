@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pothuri Krishna Surya Chowdary - AI Researcher & Data Science Student">
+    <title>Krishna Surya Chowdary - Portfolio</title>
+
+    <!-- Shared Styles (Font) -->
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        /* Shared Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth Dark Theme */
+        body {
+            /* Matching landing page dark blue-slate vibe but deeper */
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at top center, #1e293b 0%, #0f172a 60%);
+            color: #e2e8f0;
+            /* Soft White/Grey */
+            font-family: 'Outfit', 'Inter', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Header */
+        .portfolio-header {
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+
+        .portfolio-header img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            /* Soft circle */
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-header img:hover {
+            transform: scale(1.05);
+            border-color: rgba(96, 165, 250, 0.5);
+            /* Subtle blue glow on border only */
+        }
+
+        .portfolio-header h1 {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .role {
+            color: #94a3b8;
+            /* Slate 400 */
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: #f8fafc;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Items (Experience/Projects) */
+        .experience-item,
+        .project-item {
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        .experience-item:hover,
+        .project-item:hover {
+            border-left-color: #3b82f6;
+            /* Accent color on hover */
+        }
+
+        .experience-item h3,
+        .project-item h3 {
+            margin: 0 0 0.5rem 0;
+            color: #e2e8f0;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        /* "Text not entire box" hover effect */
+        .experience-item:hover h3,
+        .project-item:hover h3 {
+            color: #60a5fa;
+            /* Light Blue text highlight */
+        }
+
+        .date {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-family: monospace;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        p,
+        li {
+            color: #cbd5e1;
+            /* Slate 300 */
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-group strong {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-group span {
+            color: #e2e8f0;
+            font-size: 1.05rem;
+            line-height: 1.4;
+            display: block;
+        }
+
+        /* Navigation & Links */
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-back:hover {
+            color: #ffffff;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-links a {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .contact-links a:hover {
+            color: #3b82f6;
+            /* Blue highlight */
+            transform: translateY(-2px);
+        }
+
+        /* Download Button - Minimalist */
+        .btn-download {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #ffffff;
+            color: #0f172a;
+            border-color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../index.html" class="nav-back">&larr; Team Hub</a>
+
+    <!-- HEADER SECTION -->
+    <header class="portfolio-header">
+        <div class="container">
+            <img src="../assets/images/krishna.jpg" alt="Krishna Surya Chowdary">
+            <h1>Pothuri Krishna Surya Chowdary</h1>
+            <p class="role">AI Researcher & Data Science Student</p>
+            <p style="color: #64748b; max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.6;">
+                AI-powered coding assistant with multi-LLM reasoning and RAG-based context grounding.
+            </p>
+
+            <div class="contact-links">
+                <a href="mailto:krish20041610@gmail.com">Email</a>
+                <a href="https://github.com/krishnasurya9">GitHub</a>
+                <a href="https://linkedin.com/in/krishnasurya9">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- EXPERIENCE SECTION -->
+        <section class="content-section">
+            <h2 class="section-title">Experience</h2>
+
+            <div class="experience-item">
+                <h3>AI / ML Intern – AI-Assisted Coding Platform</h3>
+                <span class="date">Jul 2025 – Dec 2025</span>
+                <ul>
+                    <li>Developed a VS Code extension integrated with a web platform to provide intelligent,
+                        context-aware coding assistance.</li>
+                    <li>Orchestrated multiple LLMs based on task complexity and developer intent.</li>
+                    <li>Built a custom RAG pipeline retrieving context from a MongoDB knowledge base.</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                    <strong>Tech:</strong> VS Code Extension API, Python, LLMs, RAG, MongoDB, LangChain
+                </p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Machine Learning Intern @ SmartEd</h3>
+                <span class="date">Apr 2025 – Jun 2025</span>
+                <ul>
+                    <li>Contributed to model development and evaluation for educational intelligence tools.</li>
+                    <li>Implemented pipelines for production-ready ML models.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="content-section">
+            <h2 class="section-title">Projects</h2>
+
+            <article class="project-item">
+                <h3>AI-Assisted Coding Extension</h3>
+                <p>
+                    Context-aware AI coding assistant that analyzes active files and code history.
+                    Uses multi-LLM orchestration with a MongoDB-backed RAG pipeline for grounded responses.
+                </p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #60a5fa;">
+                    <a href="https://github.com/krishnasurya9/AIchatbot">View on GitHub &rarr;</a>
+                </p>
+            </article>
+
+            <article class="project-item">
+                <h3>Personality-Based Recommendation System</h3>
+                <span class="date">Jan 2025 – May 2025</span>
+                <p>Built a hybrid system integrating BERT-LSTM and rule-based scoring for personality prediction.</p>
+            </article>
+        </section>
+
+        <!-- RESEARCH SECTION -->
+        <section class="content-section">
+            <h2 class="section-title">Research</h2>
+            <div class="project-item">
+                <h3>Hybrid System for Personality Prediction Using MBTI</h3>
+                <span class="date">IdCEN 2025 Conference (Dec 2025)</span>
+                <p>
+                    Co-authored a paper proposing a hybrid prediction model integrating deep learning (BERT-LSTM)
+                    and rule-based interpretability layers.
+                </p>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="content-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <strong>AI & ML</strong>
+                    <span>Machine Learning, NLP, LLMs</span>
+                </div>
+                <div class="skill-group">
+                    <strong>LLM Systems</strong>
+                    <span>LangChain, RAG, Prompt Engineering</span>
+                </div>
+                <div class="skill-group">
+                    <strong>Frameworks</strong>
+                    <span>PyTorch, Hugging Face</span>
+                </div>
+                <div class="skill-group">
+                    <strong>Data</strong>
+                    <span>MongoDB, Vector Databases</span>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; margin-top: 4rem;">
+            <a href="../assets/documents/resume.pdf" class="btn-download" download>Download Full Resume</a>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Pothuri Krishna Surya Chowdary</p>
+    </footer>
+</body>
+
+</html>
