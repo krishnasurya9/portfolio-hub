@@ -1,136 +1,252 @@
+/**
+ * Team Portfolio Hub - Main Application Script
+ * 
+ * Handles:
+ * - Navigation behavior
+ * - Profile Selector Strip rendering
+ * - Team Cards Grid rendering
+ * - Scroll-to-card interactions
+ * - Scroll spy for active avatar highlighting
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    const gridContainer = document.getElementById('team-grid');
-
-    if (!gridContainer) {
-        console.error('Team grid container not found!');
-        return;
-    }
-
+    // Check if we have team members data
     if (typeof teamMembers === 'undefined') {
         console.error('Team members data not loaded! Make sure data.js is included before app.js.');
         return;
     }
 
-    renderTeamGrid(teamMembers, gridContainer);
-    renderHeroAvatars(teamMembers);
-    setupScrollEffects();
+    // Get sorted members (alphabetically)
+    const sortedMembers = getSortedMembers();
+
+    // Render components
+    renderProfileSelector(sortedMembers);
+    renderTeamCards(sortedMembers);
+
+    // Setup interactions
+    setupNavigation();
+    setupScrollSpy(sortedMembers);
 });
 
-function renderHeroAvatars(members) {
-    const container = document.getElementById('hero-avatars');
+/* ================================
+   NAVIGATION
+   ================================ */
+
+function setupNavigation() {
+    const nav = document.querySelector('.main-nav');
+    const mobileToggle = document.querySelector('.nav-mobile-toggle');
+    const mobileMenu = document.querySelector('.nav-mobile-menu');
+
+    // Scroll effect for navigation
+    if (nav) {
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScrollY = window.scrollY;
+        }, { passive: true });
+    }
+
+    // Mobile menu toggle
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+/* ================================
+   PROFILE SELECTOR STRIP
+   ================================ */
+
+function renderProfileSelector(members) {
+    const container = document.getElementById('profile-selector');
     if (!container) return;
 
     container.innerHTML = members.map(member => {
         const imagePath = member.image || 'assets/images/default.jpg';
+        // Get first name for display
+        const displayName = getDisplayName(member.name);
+
         return `
-            <a href="${member.link}" class="hero-avatar-link" title="${member.name}" 
-               style="border-color: ${member.themeColor || 'white'}">
-                <img src="${imagePath}" alt="${member.name}">
+            <a href="#card-${member.id}" 
+               class="profile-avatar-item" 
+               data-member-id="${member.id}"
+               data-role="${member.primaryRole}"
+               title="${member.name}">
+                <div class="profile-avatar-image">
+                    <img src="${imagePath}" alt="${member.name}" 
+                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=80'">
+                </div>
+                <span class="profile-avatar-name">${displayName}</span>
+                <span class="profile-avatar-role">${member.primaryRole.replace('-', '/')}</span>
             </a>
         `;
     }).join('');
+
+    // Add click handlers for smooth scroll
+    container.querySelectorAll('.profile-avatar-item').forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const memberId = this.dataset.memberId;
+            scrollToCard(memberId);
+
+            // Update active state
+            container.querySelectorAll('.profile-avatar-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 }
 
-function renderTeamGrid(members, container) {
-    container.innerHTML = members.map((member, index) => createMemberRow(member, index)).join('');
+/**
+ * Get a shortened display name (first name + last initial or first 2 words)
+ */
+function getDisplayName(fullName) {
+    const parts = fullName.split(' ');
+    if (parts.length <= 2) return fullName;
+    // Return first name + last initial
+    return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
 }
 
-function createMemberRow(member, index) {
-    // Fallback for missing image
+/**
+ * Scroll to a specific team card
+ */
+function scrollToCard(memberId) {
+    const card = document.getElementById(`card-${memberId}`);
+    if (card) {
+        card.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+}
+
+/* ================================
+   TEAM CARDS GRID
+   ================================ */
+
+function renderTeamCards(members) {
+    const container = document.getElementById('team-grid');
+    if (!container) return;
+
+    container.innerHTML = members.map(member => createTeamCard(member)).join('');
+}
+
+function createTeamCard(member) {
     const imagePath = member.image || 'assets/images/default.jpg';
 
-    // Check if we need to display a flagship project
-    const projectHTML = member.flagshipProject ? `
-        <div class="flagship-project">
-            <strong>🚀 Flagship Project:</strong> ${member.flagshipProject}
-        </div>
-    ` : '';
-
-    // Determine initial animation direction (alternate)
-    const infoClass = index % 2 === 0 ? 'hidden-right' : 'hidden-left';
-    const imgClass = 'hidden-scale';
-
-    // We pass the theme color as a data attribute to read it later
-    // Apply a light tint of the theme color as background
-    const themeColor = member.themeColor || '#2563eb';
-    const lightBg = themeColor + '15'; // 15 = ~8% opacity in hex
-    const rowDirection = index % 2 === 0 ? '' : 'flex-direction: row-reverse;';
+    // Generate role chips
+    const roleChips = member.roles.map(role => {
+        const chipClass = getRoleChipClass(role);
+        return `<span class="role-chip ${chipClass}">${role}</span>`;
+    }).join('');
 
     return `
-        <article class="team-member-row" data-id="${member.id}" data-color="${themeColor}" 
-                 style="background-color: ${lightBg}; ${rowDirection}">
-            <div class="member-image-container">
-                <div class="member-image-wrapper" style="border-bottom: 5px solid ${themeColor}">
-                    <img src="${imagePath}" alt="${member.name}" onerror="this.src='https://placehold.co/400x500'">
-                </div>
+        <article class="team-card" id="card-${member.id}" data-member-id="${member.id}">
+            <img class="team-card-avatar" 
+                 src="${imagePath}" 
+                 alt="${member.name}"
+                 onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=120'">
+            
+            <h3 class="team-card-name">${member.name}</h3>
+            
+            <div class="role-chips">
+                ${roleChips}
             </div>
             
-            <div class="member-info-container">
-                <h3 class="member-name" style="color: ${themeColor}">${member.name}</h3>
-                <span class="member-role">${member.role}</span>
-                <p class="member-bio">${member.description}</p>
-                
-                <a href="${member.link}" class="btn-profile" 
-                   style="background-color: ${themeColor}; border-color: ${themeColor}; color: white;">
-                    Collaborate
-                </a>
-
-                ${projectHTML}
-            </div>
+            <p class="team-card-bio">${member.bio}</p>
+            
+            <a href="${member.link}" class="btn-view-profile">
+                View Profile
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+                </svg>
+            </a>
         </article>
     `;
 }
 
-function setupScrollEffects() {
-    const rows = document.querySelectorAll('.team-member-row');
+/* ================================
+   SCROLL SPY
+   ================================ */
 
-    // Throttled scroll handler for performance
-    let ticking = false;
+function setupScrollSpy(members) {
+    const cards = document.querySelectorAll('.team-card');
+    const avatarItems = document.querySelectorAll('.profile-avatar-item');
 
-    function updateOnScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                updateRowVisuals(rows);
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
+    if (!cards.length || !avatarItems.length) return;
 
-    window.addEventListener('scroll', updateOnScroll);
+    // Use Intersection Observer for performance
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px', // Trigger when card is roughly in center
+        threshold: 0
+    };
 
-    // Initial render
-    updateRowVisuals(rows);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const memberId = entry.target.dataset.memberId;
+
+                // Update active avatar
+                avatarItems.forEach(item => {
+                    if (item.dataset.memberId === memberId) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    // Observe all cards
+    cards.forEach(card => observer.observe(card));
 }
 
-function updateRowVisuals(rows) {
-    const viewportHeight = window.innerHeight;
-    const centerLine = viewportHeight * 0.5; // Middle of screen
+/* ================================
+   UTILITIES
+   ================================ */
 
-    rows.forEach(row => {
-        const rect = row.getBoundingClientRect();
-        const rowCenter = rect.top + (rect.height / 2);
-
-        // Distance from center of viewport (0 = perfect center)
-        const distanceFromCenter = Math.abs(rowCenter - centerLine);
-
-        // Normalize: 0 at center, 1 at viewport edge
-        const normalizedDistance = Math.min(distanceFromCenter / (viewportHeight * 0.5), 1);
-
-        // Calculate opacity (1 at center, fades to 0 as it leaves)
-        const opacity = Math.max(0, 1 - (normalizedDistance * 0.8)); // Subtle fade
-
-        // Calculate scale (1.0 at center, 0.95 at edges)
-        const scale = 0.95 + (0.05 * (1 - normalizedDistance));
-
-        // Apply transformations - more subtle
-        row.style.opacity = opacity;
-        row.style.transform = `scale(${scale})`;
-
-        // Update scrollbar color when item is near center
-        if (distanceFromCenter < viewportHeight * 0.3) {
-            const color = row.dataset.color || '#3b82f6';
-            document.documentElement.style.setProperty('--scrollbar-color', color);
-        }
-    });
+// Debounce function for performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }

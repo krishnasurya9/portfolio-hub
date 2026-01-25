@@ -1,0 +1,209 @@
+/* ================================
+   STICKY NAVIGATION
+   ================================ */
+
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.main-nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+}
+
+/* Logo / Brand */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.nav-brand:hover {
+    opacity: 0.8;
+}
+
+.nav-brand-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent-ai) 0%, var(--accent-ml) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    display: block;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--accent-ai);
+}
+
+.nav-links a.active {
+    color: var(--accent-ai);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: var(--accent-ai);
+    border-radius: 1px;
+}
+
+/* GitHub Link */
+.nav-github {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.nav-github:hover {
+    background: var(--accent-ai);
+    transform: translateY(-2px);
+}
+
+.nav-github svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Mobile Menu Toggle */
+.nav-mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    gap: 5px;
+}
+
+.nav-mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.nav-mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile Navigation */
+.nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.nav-mobile-menu.active {
+    display: block;
+}
+
+.nav-mobile-menu a {
+    display: block;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.nav-mobile-menu a:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-mobile-toggle {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+}
