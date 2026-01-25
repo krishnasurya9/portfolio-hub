@@ -1,0 +1,25 @@
+@media (max-width: 900px) {
+    .team-member-row {
+        flex-direction: column !important;
+        /* Force column on mobile */
+        text-align: center;
+        padding: 4rem 1rem;
+    }
+
+    .member-info-container {
+        padding: 2rem 1rem;
+    }
+
+    .member-image-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .member-name {
+        font-size: 2.5rem;
+    }
+}

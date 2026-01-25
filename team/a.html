@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Customize these tags -->
+    <meta name="description" content="[Your Name] - Web Developer Portfolio">
+    <title>[Your Name] - Portfolio</title>
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- You can add your own custom CSS file here -->
+    <style>
+        /* Add your custom styles here or link a new CSS file */
+        .portfolio-header {
+            background-color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .portfolio-header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--primary-color);
+        }
+
+        .content-section {
+            background-color: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <nav style="background: var(--footer-bg); padding: 1rem;">
+        <div class="container">
+            <a href="../index.html" style="color: white;">&larr; Back to Team Hub</a>
+        </div>
+    </nav>
+
+    <!-- HEADER SECTION -->
+    <header class="portfolio-header">
+        <div class="container">
+            <img src="../assets/images/default.jpg" alt="Profile Photo">
+            <h1>[Your Full Name]</h1>
+            <p class="role">[Your Professional Title]</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ABOUT ME SECTION -->
+        <section class="content-section">
+            <h2>About Me</h2>
+            <p>
+                [Write specific details about yourself here. This page is detached from the main grid logic,
+                so you can edit the HTML structure as much as you want!]
+            </p>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="content-section">
+            <h2>Projects</h2>
+
+            <article style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                <h3>[Project Title]</h3>
+                <p>[Project description]</p>
+                <p><strong>Technologies:</strong> HTML, CSS, JS</p>
+                <p><a href="#" style="color: var(--primary-color);">View Project</a></p>
+            </article>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="content-section">
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 [Your Name]. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

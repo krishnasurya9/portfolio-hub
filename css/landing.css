@@ -1,0 +1,194 @@
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero .subtitle {
+    font-size: 1.8rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Sections */
+section {
+    padding: var(--spacing-xl) 0;
+}
+
+.about-section {
+    background-color: white;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    /* Centered without container class if strictly wanting narrow */
+}
+
+.about-section .container {
+    max-width: 800px;
+}
+
+/* Team Section - Anime Style Alternating Layout */
+.team-section {
+    padding: 0;
+    background-color: #f8fafc;
+}
+
+.team-member-row {
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+    /* Full viewport height feeling */
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-member-row:nth-child(even) {
+    flex-direction: row-reverse;
+    background-color: white;
+}
+
+.member-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.member-image-wrapper {
+    width: 400px;
+    height: 500px;
+    /* Portrait ratio */
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.team-member-row:hover .member-image-wrapper {
+    transform: scale(1.02) translateY(-10px);
+}
+
+.member-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.member-info-container {
+    flex: 1;
+    padding: 4rem;
+    z-index: 2;
+}
+
+.team-member-row:nth-child(odd) .member-info-container {
+    animation: slideInRight 0.8s ease-out both;
+    /* Trigger via JS intersection observer ideally, but simple animation for now */
+}
+
+.team-member-row:nth-child(even) .member-info-container {
+    animation: slideInLeft 0.8s ease-out both;
+}
+
+.member-name {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.member-role {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-family: monospace;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.member-bio {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 3rem;
+    max-width: 500px;
+}
+
+.flagship-project {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 0 8px 8px 0;
+}
+
+.btn-profile {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    background-color: #1e293b;
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    border: 2px solid transparent;
+}
+
+.btn-profile:hover {
+    background-color: transparent;
+    color: #1e293b;
+    border-color: #1e293b;
+    padding-left: 3.5rem;
+    /* Slide effect */
+}
