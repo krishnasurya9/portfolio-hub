@@ -40,6 +40,8 @@
             margin: 0 auto;
             padding: 0 1.5rem;
             animation: fadeIn 0.8s ease-out;
+            position: relative;
+            /* For absolute pos elements inside */
         }
 
         /* Header */
@@ -183,8 +185,9 @@
 
         .contact-links {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 1.5rem;
         }
 
@@ -193,12 +196,14 @@
             font-size: 0.95rem;
             transition: color 0.3s ease, transform 0.3s ease;
             position: relative;
+            text-decoration: none;
         }
 
         .contact-links a:hover {
             color: #3b82f6;
             /* Blue highlight */
             transform: translateY(-2px);
+            text-decoration: none;
         }
 
         /* Download Button - Minimalist */
@@ -211,6 +216,7 @@
             border-radius: 50px;
             font-size: 0.9rem;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .btn-download:hover {
@@ -237,44 +243,76 @@
         <div class="container">
             <img src="../assets/images/krishna.jpg" alt="Krishna Surya Chowdary">
             <h1>Pothuri Krishna Surya Chowdary</h1>
-            <p class="role">AI Researcher & Data Science Student</p>
-            <p style="color: #64748b; max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.6;">
-                AI-powered coding assistant with multi-LLM reasoning and RAG-based context grounding.
+            <p class="role">Data Science Student • Applied AI • Intelligent Systems</p>
+
+            <p style="color: #64748b; max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.6;">
+                Motivated and hands-on data science student passionate about applied AI, LLMs, and intelligent systems.
+                Seeking an internship opportunity to apply my skills in AI research, model development, and system
+                integration.
             </p>
 
             <div class="contact-links">
-                <a href="mailto:krish20041610@gmail.com">Email</a>
-                <a href="https://github.com/krishnasurya9">GitHub</a>
-                <a href="https://linkedin.com/in/krishnasurya9">LinkedIn</a>
+                <a href="mailto:krish20041610@gmail.com">krish20041610@gmail.com</a>
+                <a href="tel:+918970111616">+91 8970111616</a>
+                <span>Adoni</span>
+                <a href="https://github.com/krishnasurya9">github.com/krishnasurya9</a>
+                <a href="https://linkedin.com/in/krishnasurya9">linkedin.com/in/krishnasurya9</a>
             </div>
         </div>
     </header>
 
     <main class="container">
+
+        <!-- EDUCATION SECTION -->
+        <section class="content-section">
+            <h2 class="section-title">Education</h2>
+            <div class="experience-item">
+                <h3>Integrated B.Sc.-M.Sc. in Data Science</h3>
+                <span class="date">VIT-AP University • 2022 – Present</span>
+            </div>
+        </section>
+
         <!-- EXPERIENCE SECTION -->
         <section class="content-section">
             <h2 class="section-title">Experience</h2>
 
             <div class="experience-item">
-                <h3>AI / ML Intern – AI-Assisted Coding Platform</h3>
+                <h3>AI Intern — Planto AI</h3>
                 <span class="date">Jul 2025 – Dec 2025</span>
                 <ul>
-                    <li>Developed a VS Code extension integrated with a web platform to provide intelligent,
-                        context-aware coding assistance.</li>
-                    <li>Orchestrated multiple LLMs based on task complexity and developer intent.</li>
-                    <li>Built a custom RAG pipeline retrieving context from a MongoDB knowledge base.</li>
+                    <li>Containerized applications using Docker to resolve dependency conflicts and ensure consistent
+                        environments.</li>
+                    <li>Engineered a fault-tolerant FastAPI backend with a custom model loader that auto-switches to
+                        Gemini Flash on failure.</li>
+                    <li>Optimized RAG retrieval via Gemini Embeddings and context-aware chunking to improve relevance.
+                    </li>
+                    <li>Built a custom VS Code Extension interfacing with FastAPI routers for in-IDE developer
+                        assistance.</li>
                 </ul>
-                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                    <strong>Tech:</strong> VS Code Extension API, Python, LLMs, RAG, MongoDB, LangChain
-                </p>
             </div>
 
             <div class="experience-item">
-                <h3>Machine Learning Intern @ SmartEd</h3>
+                <h3>Machine Learning Intern — SmartEd (Virtual)</h3>
                 <span class="date">Apr 2025 – Jun 2025</span>
                 <ul>
                     <li>Contributed to model development and evaluation for educational intelligence tools.</li>
-                    <li>Implemented pipelines for production-ready ML models.</li>
+                    <li>Implemented data preprocessing, model tuning, and evaluation pipelines for production-ready ML
+                        models.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- RESEARCH SECTION -->
+        <section class="content-section">
+            <h2 class="section-title">Research</h2>
+            <div class="project-item">
+                <h3>Co-author, “An Ensemble-Based Hybrid System for Personality Prediction”</h3>
+                <span class="date">Accepted at IDCEN 2025</span>
+                <ul>
+                    <li>Designed hybrid BERT-LSTM and rule-based architecture to achieve higher predictive accuracy than
+                        standalone models.</li>
+                    <li>Ongoing: Studying extended evaluation metrics for Time-Series ML models (Robustness and
+                        Calibration) at VIT-AP.</li>
                 </ul>
             </div>
         </section>
@@ -284,60 +322,61 @@
             <h2 class="section-title">Projects</h2>
 
             <article class="project-item">
-                <h3>AI-Assisted Coding Extension</h3>
-                <p>
-                    Context-aware AI coding assistant that analyzes active files and code history.
-                    Uses multi-LLM orchestration with a MongoDB-backed RAG pipeline for grounded responses.
-                </p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #60a5fa;">
-                    <a href="https://github.com/krishnasurya9/AIchatbot">View on GitHub &rarr;</a>
-                </p>
+                <h3>Multi-Modal Personality Engine (Python, FastAPI)</h3>
+                <span class="date">Jan 2025 – May 2025</span>
+                <ul>
+                    <li>Architected Hybrid Filtering system serving recommendations via Spotify/TMDB APIs using
+                        BERT-LSTM.</li>
+                    <li>Designed an Explainable AI (XAI) layer to map metadata to Big Five (OCEAN) traits for user
+                        transparency.</li>
+                </ul>
             </article>
 
             <article class="project-item">
-                <h3>Personality-Based Recommendation System</h3>
-                <span class="date">Jan 2025 – May 2025</span>
-                <p>Built a hybrid system integrating BERT-LSTM and rule-based scoring for personality prediction.</p>
+                <h3>Offline-First Retrieval Engine (Python, Mistral 13B)</h3>
+                <span class="date">Ongoing</span>
+                <ul>
+                    <li>Engineered Offline-First analytics engine with Hybrid Search (TF-IDF + Semantic) using Mistral
+                        13B via LM Studio.</li>
+                </ul>
             </article>
-        </section>
-
-        <!-- RESEARCH SECTION -->
-        <section class="content-section">
-            <h2 class="section-title">Research</h2>
-            <div class="project-item">
-                <h3>Hybrid System for Personality Prediction Using MBTI</h3>
-                <span class="date">IdCEN 2025 Conference (Dec 2025)</span>
-                <p>
-                    Co-authored a paper proposing a hybrid prediction model integrating deep learning (BERT-LSTM)
-                    and rule-based interpretability layers.
-                </p>
-            </div>
         </section>
 
         <!-- SKILLS SECTION -->
         <section class="content-section">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-group">
-                    <strong>AI & ML</strong>
-                    <span>Machine Learning, NLP, LLMs</span>
+                    <strong>Languages</strong>
+                    <span>Python (Advanced), SQL, TypeScript, Java</span>
                 </div>
                 <div class="skill-group">
-                    <strong>LLM Systems</strong>
-                    <span>LangChain, RAG, Prompt Engineering</span>
+                    <strong>AI & ML Stack</strong>
+                    <span>LLMs (Gemini, Mistral), RAG, LangChain, BERT, LSTM, TensorFlow, PyTorch</span>
                 </div>
                 <div class="skill-group">
-                    <strong>Frameworks</strong>
-                    <span>PyTorch, Hugging Face</span>
+                    <strong>Backend & DevOps</strong>
+                    <span>FastAPI, Flask, Docker, Git, VS Code Extensions</span>
                 </div>
                 <div class="skill-group">
-                    <strong>Data</strong>
-                    <span>MongoDB, Vector Databases</span>
+                    <strong>Tools</strong>
+                    <span>LM Studio, Postman, Jupyter Notebook, Pandas, Scikit-learn</span>
                 </div>
             </div>
         </section>
 
+        <!-- EXTRACURRICULARS -->
+        <section class="content-section">
+            <h2 class="section-title">Extracurriculars</h2>
+            <ul>
+                <li>Actively exploring emerging AI tools, LLM architectures, and applied system design.</li>
+                <li>Led academic AI research collaborations and contributed to peer-reviewed publications.</li>
+            </ul>
+        </section>
+
+        <!-- RESUME DOWNLOAD (Placeholder link, as per user request to replace content) -->
         <section style="text-align: center; margin-top: 4rem;">
+            <!-- Assuming the user wants to use a new resume file, keeping the link generic or pointing to where it should be -->
             <a href="../assets/documents/resume.pdf" class="btn-download" download>Download Full Resume</a>
         </section>
     </main>

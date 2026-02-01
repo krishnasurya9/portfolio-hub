@@ -20,7 +20,7 @@ const teamMembers = [
         name: "Pothuri Krishna Surya Chowdary",
         roles: ["AI/ML", "Research"],
         primaryRole: "ai-ml",
-        bio: "Building AI-powered coding assistants with multi-LLM reasoning and RAG-based context grounding.",
+        bio: "Data Science Student building applied AI systems. Experience with multi-LLM orchestration, RAG pipelines, and BERT-LSTM models.",
         image: "assets/images/krishna.jpg",
         link: "team/krishna.html",
         themeColor: "#3b82f6"
